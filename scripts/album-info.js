@@ -6,4 +6,4 @@
 }
 
 // ('.artist') used as "artist" in within a class in index.html
-// ('#release-info') used as "releaseInfo" is within an id
+// ('#release-info') used as "releaseInfo" is within an id in index.html
