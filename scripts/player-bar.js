@@ -1,6 +1,6 @@
 {
   $('button#play-pause').on('click', function() {
-    player.playPause();
+    helper.playPauseAndUpdate();
     $(this).attr('playState', player.playState);
   });
 
@@ -12,7 +12,7 @@
     if (nextSongIndex >= album.songs.length) { return; }
 
     const nextSong = album.songs[nextSongIndex];
-    player.playPause(nextSong);
+    helper.playPauseAndUpdate(nextSong);
   });
 
 // Used 'button#next' block for consistency in formatting
@@ -25,7 +25,7 @@
 
     const prevSong = album.songs[prevSongIndex];
     // If the prevSongIndex is less than 0, the button will not respond, otherwise it will construct prevSong using the index of the previous song
-    player.playPause(prevSong);
+    helper.playPauseAndUpdate(prevSong);
     // Plays the previous song
   });
 
@@ -38,8 +38,7 @@
       const currentTime = player.getTime();
       const duration = player.getDuration();
       const percent = (currentTime / duration) * 100;
-      $('#time-control .current-time').text( currentTime );
-      $('#time-control .total-time').text ( duration );
+      $('#time-control .current-time').text( player.prettyTime(currentTime) );
       $('#time-control input').val(percent);
   }, 1000);
 
