@@ -6,6 +6,17 @@ class Player {
     this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
   }
 
+  prettyTime(timeInSeconds) {
+    let time;
+    timeInSeconds = Math.floor(timeInSeconds);
+
+    let remainingSeconds = ("0" + timeInSeconds % 60).slice(-2);
+    let minutes = Math.floor(timeInSeconds/60);
+
+    time = `${minutes}:${remainingSeconds}`;
+    return time;
+  }
+
   getDuration() {
     return this.soundObject.getDuration();
   }
@@ -27,7 +38,7 @@ class Player {
       this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
     }
     if (this.playState === 'paused' || this.playState === 'stopped') {
-      this.soundObject.setVolume( this.volume );
+      this.soundObject.setVolume(this.volume);
       this.soundObject.play();
       this.playState = 'playing';
       this.currentlyPlaying.element.removeClass('paused').addClass('playing');
@@ -36,17 +47,6 @@ class Player {
       this.playState = 'paused';
       this.currentlyPlaying.element.removeClass('playing').addClass('paused');
     }
-  }
-
-  prettyTime(timeInSeconds) {
-    let time;
-    timeInSeconds = Math.floor(timeInSeconds);
-
-    let remainingSeconds = ("0" + timeInSeconds % 60).slice(-2);
-    let minutes = Math.floor(timeInSeconds/60);
-
-    time = `${minutes}:${remainingSeconds}`;
-    return time;
   }
 
   skipTo (percent) {

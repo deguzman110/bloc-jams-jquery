@@ -1,7 +1,9 @@
-{
+$(document).ready(function() {
   $('button#play-pause').on('click', function() {
-    helper.playPauseAndUpdate();
+    player.playPause();
     $(this).attr('playState', player.playState);
+    const totalTime = player.prettyTime(player.currentlyPlaying.duration);
+    $('#time-control .total-time').text(totalTime);
   });
 
   $('button#next').on('click', function() {
@@ -15,7 +17,6 @@
     helper.playPauseAndUpdate(nextSong);
   });
 
-// Used 'button#next' block for consistency in formatting
   $('button#previous').on('click', function() {
     if (player.playState !== 'playing') { return; }
 
@@ -42,9 +43,7 @@
       $('#time-control input').val(percent);
   }, 1000);
 
-  // Assignment Work:
-  // #1
   $('#volume-control input').on('input', function (event) {
     player.setVolume(event.target.value);
   });
-}
+});
